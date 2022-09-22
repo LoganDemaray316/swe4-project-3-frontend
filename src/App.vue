@@ -5,20 +5,20 @@
 </template>
 
 <script>
-import NavBar from "./components/NavBar.vue";
+  import NavBar from "./components/NavBar.vue";
 
-export default {
-  name: "App",
-  components: {
-    NavBar,
-  },
-};
+  export default {
+    name: "App",
+    components: {
+      NavBar,
+    },
+  };
 </script>
 
 <style>
-#app {
-  display: flex;
-  flex-flow: column;
-  height: 100vh;
-}
+  #app {
+    display: flex;
+    flex-flow: column;
+    height: 100vh;
+  }
 </style>

@@ -8,34 +8,34 @@
 </template>
 
 <script>
-export default {
-  name: "NavBar",
-  props: {},
-};
+  export default {
+    name: "NavBar",
+    props: {},
+  };
 </script>
 
 <style scoped>
-.mainNav {
-  background-color: var(--dark-blue);
-  display: flex;
-  flex-flow: row;
-  padding: 0 4vw 0 4vw;
-}
+  .mainNav {
+    background-color: var(--dark-blue);
+    display: flex;
+    flex-flow: row;
+    padding: 0 4vw 0 4vw;
+  }
 
-.mainNavLogoArea {
-  align-items: center;
-  display: flex;
-  flex-flow: row;
-  padding: 2.5vh 0 2.5vh 0;
-  width: 100%;
-}
+  .mainNavLogoArea {
+    align-items: center;
+    display: flex;
+    flex-flow: row;
+    padding: 2.5vh 0 2.5vh 0;
+    width: 100%;
+  }
 
-.mainNavLogoText {
-  align-items: center;
-  color: white;
-  font-size: 1.5vw;
-  font-weight: 200;
-  letter-spacing: 0.4vw;
-  padding: 0 0 0 2vw;
-}
+  .mainNavLogoText {
+    align-items: center;
+    color: white;
+    font-size: 1.5vw;
+    font-weight: 200;
+    letter-spacing: 0.4vw;
+    padding: 0 0 0 2vw;
+  }
 </style>
