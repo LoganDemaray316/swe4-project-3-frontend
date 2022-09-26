@@ -1,41 +1,20 @@
 <template>
-  <nav class="mainNav">
-    <div class="mainNavLogoArea">
-      <img src="../assets/OC_LOGO_WHITE.svg" alt="OC Logo in white." />
-      <div class="mainNavLogoText">SECTION PLANNING</div>
-    </div>
-  </nav>
+  <v-app-bar app color="darkBlue" dark>
+    <v-img
+      alt="Vuetify Logo"
+      class="shrink mr-4"
+      contain
+      src="../assets/OC_LOGO_WHITE.svg"
+      transition="scale-transition"
+      width="40" />
+
+    <v-toolbar-title class="font-weight-bold">SECTION PLANNING</v-toolbar-title>
+  </v-app-bar>
 </template>
 
 <script>
   export default {
     name: "NavBar",
-    props: {},
+    data: () => ({}),
   };
 </script>
-
-<style scoped>
-  .mainNav {
-    background-color: var(--dark-blue);
-    display: flex;
-    flex-flow: row;
-    padding: 0 4vw 0 4vw;
-  }
-
-  .mainNavLogoArea {
-    align-items: center;
-    display: flex;
-    flex-flow: row;
-    padding: 2.5vh 0 2.5vh 0;
-    width: 100%;
-  }
-
-  .mainNavLogoText {
-    align-items: center;
-    color: white;
-    font-size: 1.5vw;
-    font-weight: 200;
-    letter-spacing: 0.4vw;
-    padding: 0 0 0 2vw;
-  }
-</style>

@@ -1,7 +1,11 @@
 <template>
-  <div id="app">
-    <NavBar />
-  </div>
+  <v-app>
+    <NavBar></NavBar>
+
+    <v-main>
+      <v-container></v-container>
+    </v-main>
+  </v-app>
 </template>
 
 <script>
@@ -12,13 +16,6 @@
     components: {
       NavBar,
     },
+    data: () => ({}),
   };
 </script>
-
-<style>
-  #app {
-    display: flex;
-    flex-flow: column;
-    height: 100vh;
-  }
-</style>
