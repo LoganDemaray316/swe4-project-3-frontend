@@ -5,7 +5,8 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "bundle": "mv .env dist"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.2.0",
@@ -17,6 +18,8 @@
     "core-js": "^3.8.3",
     "vue": "^2.6.14",
     "vuetify": "^2.6.0",
+    "vue-router": "^3.6.4",
+    "vuex": "^3.6.2",
     "google-fonts-webpack-plugin": "^0.4.4"
   },
   "devDependencies": {
