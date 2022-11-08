@@ -43,8 +43,13 @@
 </template>
 
 <script>
+  import HomeDashboard from "./components/HomeDashboard.vue";
+
   export default {
     name: "App",
+    components: {
+      HomeDashboard,
+    },
     data: () => ({
       sidebar: false,
       menuItems: [
