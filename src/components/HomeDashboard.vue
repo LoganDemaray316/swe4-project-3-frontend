@@ -11,7 +11,7 @@
               <v-col
                 v-for="section in sections"
                 :key="section.sectionId"
-                :lg="3"
+                :lg="sections.length < 4 ? 6 : 3"
                 :md="6"
                 :sm="6"
                 :xs="12">
