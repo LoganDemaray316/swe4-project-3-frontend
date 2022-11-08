@@ -75,15 +75,33 @@
       <v-divider class="lightGray"></v-divider>
     </v-list>
     <v-card-actions class="white">
-      <v-btn text class="font-weight-bold darkBlue--text"> Edit </v-btn>
+      <!-- <v-btn text class="font-weight-bold darkBlue--text"> Edit </v-btn> -->
+      <v-dialog v-model="dialog" persistent max-width="600px">
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn
+            text
+            class="font-weight-bold darkBlue--text"
+            v-bind="attrs"
+            v-on="on">
+            Edit
+          </v-btn>
+        </template>
+        <SectionItemEdit></SectionItemEdit>
+      </v-dialog>
+
       <v-btn text class="font-weight-bold darkerRed--text"> Delete </v-btn>
     </v-card-actions>
   </v-card>
 </template>
 
 <script>
+  import SectionItemEdit from "./SectionItemEdit.vue";
+
   export default {
     name: "SectionItem",
+    components: {
+      SectionItemEdit,
+    },
     props: {
       section: Object,
     },
