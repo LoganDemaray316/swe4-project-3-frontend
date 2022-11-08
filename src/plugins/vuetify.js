@@ -9,6 +9,7 @@ export default new Vuetify({
       light: {
         darkBlue: "#627985",
         lightBlue: "#b2bfc6",
+        lightBlueDarker: "#919DA4",
         lightGray: "#ececec",
         lightRed: "#cd9a9a",
         darkerRed: "#9e7676",

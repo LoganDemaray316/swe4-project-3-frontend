@@ -5,8 +5,7 @@
         <v-list-item
           v-for="item in menuItems"
           :key="item.title"
-          :to="item.path"
-        >
+          :to="item.path">
           <v-list-tile-content>{{ item.title }}</v-list-tile-content>
         </v-list-item>
       </v-list>
@@ -22,8 +21,7 @@
         contain
         src="./assets/OC_LOGO_WHITE.svg"
         transition="scale-transition"
-        width="40"
-      />
+        width="40" />
 
       <v-toolbar-title class="font-weight-bold">DASHBOARD</v-toolbar-title>
       <v-spacer></v-spacer>
@@ -32,29 +30,38 @@
           depressed
           v-for="item in menuItems"
           :key="item.title"
-          :to="item.path"
-        >
+          :to="item.path">
           {{ item.title }}
         </v-btn>
       </v-toolbar-items>
     </v-app-bar>
 
-    <v-main>
-      <v-container> </v-container>
+    <v-main class="lightGray">
+      <HomeDashboard></HomeDashboard>
     </v-main>
   </v-app>
 </template>
 
 <script>
-export default {
-  name: "App",
-  data: () => ({
-    sidebar: false,
-    menuItems: [
-      { title: "Dashboard", path: "/" },
-      { title: "Section Planner", path: "/" },
-      { title: "Course Catelog", path: "/" },
-    ],
-  }),
-};
+  import HomeDashboard from "./components/HomeDashboard.vue";
+
+  export default {
+    name: "App",
+    components: {
+      HomeDashboard,
+    },
+    data: () => ({
+      sidebar: false,
+      menuItems: [
+        { title: "Dashboard", path: "/" },
+        { title: "Section Planner", path: "/" },
+        { title: "Course Catelog", path: "/" },
+      ],
+    }),
+    computed: {
+      theme() {
+        return this.$vuetify.theme.dark ? "dark" : "light";
+      },
+    },
+  };
 </script>
