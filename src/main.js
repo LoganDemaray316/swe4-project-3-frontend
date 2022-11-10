@@ -16,6 +16,8 @@ import { faClock } from "@fortawesome/free-solid-svg-icons";
 import { faCalendarDays } from "@fortawesome/free-solid-svg-icons";
 import { faPen } from "@fortawesome/free-solid-svg-icons";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faFlask } from "@fortawesome/free-solid-svg-icons";
+import { faCircleExclamation } from "@fortawesome/free-solid-svg-icons";
 
 library.add(faLocationDot);
 library.add(faUserGroup);
@@ -25,6 +27,8 @@ library.add(faClock);
 library.add(faCalendarDays);
 library.add(faPen);
 library.add(faTrash);
+library.add(faFlask);
+library.add(faCircleExclamation);
 
 Vue.component("font-awesome-icon", FontAwesomeIcon);
 
