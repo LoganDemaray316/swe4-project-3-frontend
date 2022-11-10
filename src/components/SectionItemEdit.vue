@@ -156,6 +156,7 @@
             </v-dialog>
           </v-col>
         </v-row>
+        <!-- Dates may change depending on how we represent it in the database -->
         <v-row>
           <!-- Section Start Date Picker -->
           <v-col cols="6">
