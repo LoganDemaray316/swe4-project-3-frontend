@@ -1,11 +1,12 @@
 <template>
   <v-app>
-    <v-navigation-drawer v-model="sidebar" app>
+    <v-navigation-drawer v-if="sidebarChange" v-model="sidebar" app>
       <v-list>
         <v-list-item
           v-for="item in menuItems"
           :key="item.title"
-          :to="item.path">
+          :to="item.path"
+        >
           <v-list-tile-content>{{ item.title }}</v-list-tile-content>
         </v-list-item>
       </v-list>
@@ -13,7 +14,7 @@
 
     <v-app-bar app color="darkBlue" dark>
       <span class="hidden-md-and-up">
-        <v-app-bar-nav-icon @click="sidebar = !sidebar"></v-app-bar-nav-icon>
+        <v-app-bar-nav-icon @click="sidebar = true"></v-app-bar-nav-icon>
       </span>
       <v-img
         alt="OC Logo"
@@ -21,47 +22,55 @@
         contain
         src="./assets/OC_LOGO_WHITE.svg"
         transition="scale-transition"
-        width="40" />
+        width="40"
+      />
 
-      <v-toolbar-title class="font-weight-bold">DASHBOARD</v-toolbar-title>
+      <v-toolbar-title class="font-weight-bold"
+        >SECTION PLANNER</v-toolbar-title
+      >
       <v-spacer></v-spacer>
       <v-toolbar-items class="hidden-sm-and-down">
         <v-btn
-          depressed
+          color="white"
+          plain
           v-for="item in menuItems"
           :key="item.title"
-          :to="item.path">
+          :to="item.path"
+        >
           {{ item.title }}
         </v-btn>
       </v-toolbar-items>
     </v-app-bar>
 
-    <v-main class="lightGray">
-      <HomeDashboard></HomeDashboard>
-    </v-main>
+    <!-- <v-main class="lightGray"> </v-main> -->
+    <v-content>
+      <router-view></router-view>
+    </v-content>
   </v-app>
 </template>
 
 <script>
-  import HomeDashboard from "./components/HomeDashboard.vue";
-
-  export default {
-    name: "App",
-    components: {
-      HomeDashboard,
+export default {
+  name: "App",
+  data: () => ({
+    sidebar: false,
+    menuItems: [
+      { title: "Dashboard", path: "/HomeDashboard" },
+      { title: "Section Planner", path: "/" },
+      { title: "Course Catalog", path: "/CourseCatalog" },
+    ],
+  }),
+  computed: {
+    theme() {
+      return this.$vuetify.theme.dark ? "dark" : "light";
     },
-    data: () => ({
-      sidebar: false,
-      menuItems: [
-        { title: "Dashboard", path: "/" },
-        { title: "Section Planner", path: "/" },
-        { title: "Course Catelog", path: "/" },
-      ],
-    }),
-    computed: {
-      theme() {
-        return this.$vuetify.theme.dark ? "dark" : "light";
-      },
+    sidebarChange() {
+      if (this.$vuetify.breakpoint.lg || this.$vuetify.breakpoint.xl) {
+        return false;
+      } else {
+        return true;
+      }
     },
-  };
+  },
+};
 </script>
