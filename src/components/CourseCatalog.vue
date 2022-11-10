@@ -9,64 +9,90 @@
         single-line
         hide-details
       ></v-text-field>
-      <v-dialog v-model="dialog" scrollable max-width="300px">
-        <template v-slot:activator="{ on, attrs }">
-          <v-btn color="darkBlue" plain dark v-bind="attrs" v-on="on">
-            <font-awesome-icon
-              class="darkBlue--text"
-              icon="fa-solid fa-filter"
-              size="xl"
-            />
-          </v-btn>
-        </template>
-        <v-card>
-          <v-card-title>Filters For Courses</v-card-title>
-          <v-divider></v-divider>
-          <v-card-text style="height: 300px; width: 300px">
-            <v-checkbox-group v-model="dialogm1">
-              <v-card-title class="font-weight-bold">
-                {{ "SEMESTER" }}
-              </v-card-title>
-              <v-row>
-                <v-checkbox label="Fall" value="fall"></v-checkbox>
-                <v-checkbox label="Winter" value="winter"></v-checkbox>
-                <v-checkbox label="Spring" value="spring"></v-checkbox>
-                <v-checkbox label="Summer" value="summer"></v-checkbox>
-              </v-row>
-              <v-card-title class="font-weight-bold">
-                {{ "LOCATION" }}
-              </v-card-title>
-              <v-checkbox label="In-Class" value="in-class"></v-checkbox>
-              <v-checkbox label="Online" value="online"></v-checkbox>
-              <v-checkbox label="Belize" value="belize"></v-checkbox>
-              <v-checkbox label="Benin" value="benin"></v-checkbox>
-              <v-checkbox label="Bhutan" value="bhutan"></v-checkbox>
-              <v-checkbox label="Bolivia" value="bolivia"></v-checkbox>
-              <v-checkbox
-                label="Bosnia and Herzegovina"
-                value="bosnia"
-              ></v-checkbox>
-              <v-checkbox label="Botswana" value="botswana"></v-checkbox>
-              <v-checkbox label="Brazil" value="brazil"></v-checkbox>
-              <v-checkbox label="Brunei" value="brunei"></v-checkbox>
-              <v-checkbox label="Bulgaria" value="bulgaria"></v-checkbox>
-              <v-checkbox label="Burkina Faso" value="burkina"></v-checkbox>
-              <v-checkbox label="Burma" value="burma"></v-checkbox>
-              <v-checkbox label="Burundi" value="burundi"></v-checkbox>
-            </v-checkbox-group>
-          </v-card-text>
-          <v-divider></v-divider>
-          <v-card-actions>
-            <v-btn color="blue darken-1" text @click="dialog = false">
-              Close
-            </v-btn>
-            <v-btn color="blue darken-1" text @click="dialog = false">
-              Save
-            </v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-dialog>
+      <v-btn color="darkBlue" plain v-on:click="filterShowing = !filterShowing">
+        <font-awesome-icon
+          class="darkBlue--text"
+          icon="fa-solid fa-filter"
+          size="xl"
+        />
+      </v-btn>
     </v-card-title>
+    <v-container fluid>
+      <v-row v-if="filterShowing">
+        <v-col :lg="2" :md="3" :sm="6" :xs="12">
+          <v-card-title class="font-weight-bold">
+            {{ "SEMESTER" }}
+          </v-card-title>
+          <v-checkbox label="Fall" value="fall" hide-details></v-checkbox>
+          <v-checkbox label="Winter" value="winter" hide-details></v-checkbox>
+          <v-checkbox label="Spring" value="spring" hide-details></v-checkbox>
+          <v-checkbox label="Summer" value="summer" hide-details></v-checkbox>
+        </v-col>
+        <v-col :lg="2" :md="3" :sm="6" :xs="12">
+          <v-card-title class="font-weight-bold">
+            {{ "LOCATION" }}
+          </v-card-title>
+          <v-checkbox
+            label="In-Class"
+            value="in-class"
+            hide-details
+          ></v-checkbox>
+          <v-checkbox label="Online" value="online" hide-details></v-checkbox>
+        </v-col>
+        <v-col :lg="2" :md="3" :sm="6" :xs="12">
+          <v-card-title class="font-weight-bold">
+            {{ "CLASS LEVEL" }}
+          </v-card-title>
+          <v-checkbox
+            label="Freshman"
+            value="freshman"
+            hide-details
+          ></v-checkbox>
+          <v-checkbox
+            label="Sophomore"
+            value="sophomore"
+            hide-details
+          ></v-checkbox>
+          <v-checkbox label="Junior" value="junior" hide-details></v-checkbox>
+          <v-checkbox label="Senior" value="senior" hide-details></v-checkbox>
+          <v-checkbox
+            label="Graduate"
+            value="graduate"
+            hide-details
+          ></v-checkbox>
+        </v-col>
+        <v-col :lg="2" :md="3" :sm="6" :xs="12">
+          <v-card-title class="font-weight-bold">
+            {{ "DAYS OF CLASS" }}
+          </v-card-title>
+          <v-checkbox label="Sunday" value="sunday" hide-details></v-checkbox>
+          <v-checkbox label="Monday" value="monday" hide-details></v-checkbox>
+          <v-checkbox label="Tuesday" value="tuesday" hide-details></v-checkbox>
+          <v-checkbox
+            label="Wednesday"
+            value="wednesday"
+            hide-details
+          ></v-checkbox>
+          <v-checkbox
+            label="Thursday"
+            value="thursday"
+            hide-details
+          ></v-checkbox>
+          <v-checkbox label="Friday" value="friday" hide-details></v-checkbox>
+          <v-checkbox label="Saturday" value="saturday"></v-checkbox>
+        </v-col>
+        <v-col :lg="2" :md="3" :sm="6" :xs="12">
+          <v-card-title class="font-weight-bold">
+            {{ "LAB" }}
+          </v-card-title>
+          <v-checkbox
+            label="Only Labs"
+            value="onlylabs"
+            hide-details
+          ></v-checkbox>
+        </v-col>
+      </v-row>
+    </v-container>
     <v-pagination v-model="page" :length="6"></v-pagination>
     <v-row>
       <v-col cols="12">
@@ -102,6 +128,7 @@ export default {
   },
   data() {
     return {
+      filterShowing: false,
       // Fake section data that will be replaced by a store getter to fill this list with section objects.
       sections: [
         {
@@ -149,96 +176,3 @@ export default {
   },
 };
 </script>
-
-<!-- 
-    
-    This is homedashboard, I am waiting for router to work...
-
-    <template>
-    <v-container fluid>
-      <v-row>
-        <v-col cols="12">
-          <v-card>
-            <v-card-title class="font-weight-bold white--text darkBlue">
-              YOUR SECTIONS
-            </v-card-title>
-            <v-container fluid>
-              <v-row dense>
-                <v-col
-                  v-for="section in sections"
-                  :key="section.sectionId"
-                  :lg="sections.length < 4 ? 6 : 3"
-                  :md="6"
-                  :sm="6"
-                  :xs="12">
-                  <CourseItem :section="section"></CourseItem>
-                </v-col>
-              </v-row>
-            </v-container>
-          </v-card>
-        </v-col>
-        <v-col cols="6">
-          <v-card>
-            <v-card-title class="font-weight-bold white--text darkBlue">
-              FAVORITES
-            </v-card-title>
-            <v-card-text> </v-card-text>
-          </v-card>
-        </v-col>
-        <v-col cols="6">
-          <v-card>
-            <v-card-title class="font-weight-bold white--text darkBlue">
-              ABOUT
-            </v-card-title>
-            <v-card-text> </v-card-text>
-          </v-card>
-        </v-col>
-      </v-row>
-    </v-container>
-  </template>
-  
-  <script>
-    import CourseItem from "./CourseItem.vue";
-  
-    export default {
-      name: "HomeDashboard",
-      components: {
-        CourseItem,
-      },
-      data() {
-        return {
-          // Fake section data that will be replaced by a store getter to fill this list with section objects.
-          sections: [
-            {
-              sectionId: 0,
-              sectionNumber: "CMSC-2113",
-              sectionInstanceNumber: 1,
-              sectionClass: "Object Oriented Programming",
-              sectionStartTime: "10:00am",
-              sectionEndTime: "10:55am",
-              sectionDOW: ["M", "W", "F"],
-              sectionLocation: "PEC 213",
-              sectionSize: 30,
-              sectionDate: "08/06/2022 - 11/18/2022",
-              sectionSemester: "Fall",
-              sectionTerms: ["T1", "T2"],
-            },
-            {
-              sectionId: 1,
-              sectionNumber: "CMSC-2413",
-              sectionInstanceNumber: 1,
-              sectionClass: "Assembly Language",
-              sectionStartTime: "11:00am",
-              sectionEndTime: "11:55am",
-              sectionDOW: ["T", "TH"],
-              sectionLocation: "PEC 211",
-              sectionSize: 30,
-              sectionDate: "08/06/2022 - 11/18/2022",
-              sectionSemester: "Fall",
-              sectionTerms: ["T1", "T2"],
-            },
-          ],
-        };
-      },
-    };
-  </script> -->
