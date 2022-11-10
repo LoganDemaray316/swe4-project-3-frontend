@@ -4,7 +4,7 @@
       {{ section.sectionNumber + "-" + section.sectionInstanceNumber }}
     </v-card-title>
     <v-card-subtitle class="font-weight-bold darkBlue--text pb-0">
-      {{ section.sectionClass }}
+      {{ section.sectionName }}
     </v-card-subtitle>
 
     <v-chip-group column class="mx-4 my-2">
@@ -22,7 +22,7 @@
         <font-awesome-icon
           class="darkBlue--text mr-2"
           icon="fa-solid fa-calendar-days" />
-        {{ section.sectionDOW.join(" ") }}
+        {{ createDOWString() }}
       </v-chip>
       <v-chip :ripple="false" class="font-weight-bold white darkBlue--text">
         <font-awesome-icon
@@ -54,7 +54,11 @@
           </v-list-item-icon>
           <v-list-item-content>
             {{
-              section.sectionSemester.toUpperCase() + ": " + section.sectionDate
+              section.sectionSemester.toUpperCase() +
+              ": " +
+              section.sectionStartDate +
+              " - " +
+              section.sectionEndDate
             }}
           </v-list-item-content>
         </v-list-item>
@@ -75,7 +79,6 @@
       <v-divider class="lightGray"></v-divider>
     </v-list>
     <v-card-actions class="white">
-      <!-- <v-btn text class="font-weight-bold darkBlue--text"> Edit </v-btn> -->
       <v-dialog v-model="dialog" persistent max-width="600px">
         <template v-slot:activator="{ on, attrs }">
           <v-btn
@@ -86,7 +89,9 @@
             Edit
           </v-btn>
         </template>
-        <SectionItemEdit></SectionItemEdit>
+        <SectionItemEdit
+          @closeDialogEvent="closeDialog"
+          :section="section"></SectionItemEdit>
       </v-dialog>
 
       <v-btn text class="font-weight-bold darkerRed--text"> Delete </v-btn>
@@ -99,11 +104,32 @@
 
   export default {
     name: "SectionItem",
+    data() {
+      return {
+        dialog: false,
+      };
+    },
     components: {
       SectionItemEdit,
     },
     props: {
       section: Object,
+    },
+    methods: {
+      closeDialog(val) {
+        this.dialog = val;
+      },
+      createDOWString() {
+        let ret = "";
+        for (var i = 0; i < this.section.sectionDOW.length; i++) {
+          if (this.section.sectionDOW[i] === "Thursday") {
+            ret += " " + "TH";
+          } else {
+            ret += " " + this.section.sectionDOW[i][0];
+          }
+        }
+        return ret.trim();
+      },
     },
   };
 </script>
