@@ -9,6 +9,63 @@
         single-line
         hide-details
       ></v-text-field>
+      <v-dialog v-model="dialog" scrollable max-width="300px">
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn color="darkBlue" plain dark v-bind="attrs" v-on="on">
+            <font-awesome-icon
+              class="darkBlue--text"
+              icon="fa-solid fa-filter"
+              size="xl"
+            />
+          </v-btn>
+        </template>
+        <v-card>
+          <v-card-title>Filters For Courses</v-card-title>
+          <v-divider></v-divider>
+          <v-card-text style="height: 300px; width: 300px">
+            <v-checkbox-group v-model="dialogm1">
+              <v-card-title class="font-weight-bold">
+                {{ "SEMESTER" }}
+              </v-card-title>
+              <v-row>
+                <v-checkbox label="Fall" value="fall"></v-checkbox>
+                <v-checkbox label="Winter" value="winter"></v-checkbox>
+                <v-checkbox label="Spring" value="spring"></v-checkbox>
+                <v-checkbox label="Summer" value="summer"></v-checkbox>
+              </v-row>
+              <v-card-title class="font-weight-bold">
+                {{ "LOCATION" }}
+              </v-card-title>
+              <v-checkbox label="In-Class" value="in-class"></v-checkbox>
+              <v-checkbox label="Online" value="online"></v-checkbox>
+              <v-checkbox label="Belize" value="belize"></v-checkbox>
+              <v-checkbox label="Benin" value="benin"></v-checkbox>
+              <v-checkbox label="Bhutan" value="bhutan"></v-checkbox>
+              <v-checkbox label="Bolivia" value="bolivia"></v-checkbox>
+              <v-checkbox
+                label="Bosnia and Herzegovina"
+                value="bosnia"
+              ></v-checkbox>
+              <v-checkbox label="Botswana" value="botswana"></v-checkbox>
+              <v-checkbox label="Brazil" value="brazil"></v-checkbox>
+              <v-checkbox label="Brunei" value="brunei"></v-checkbox>
+              <v-checkbox label="Bulgaria" value="bulgaria"></v-checkbox>
+              <v-checkbox label="Burkina Faso" value="burkina"></v-checkbox>
+              <v-checkbox label="Burma" value="burma"></v-checkbox>
+              <v-checkbox label="Burundi" value="burundi"></v-checkbox>
+            </v-checkbox-group>
+          </v-card-text>
+          <v-divider></v-divider>
+          <v-card-actions>
+            <v-btn color="blue darken-1" text @click="dialog = false">
+              Close
+            </v-btn>
+            <v-btn color="blue darken-1" text @click="dialog = false">
+              Save
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
     </v-card-title>
     <v-pagination v-model="page" :length="6"></v-pagination>
     <v-row>
