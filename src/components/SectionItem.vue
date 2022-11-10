@@ -79,7 +79,7 @@
       <v-divider class="lightGray"></v-divider>
     </v-list>
     <v-card-actions class="white">
-      <v-dialog v-model="dialog" persistent max-width="600px">
+      <v-dialog v-model="editDialog" persistent max-width="600px">
         <template v-slot:activator="{ on, attrs }">
           <v-btn
             text
@@ -90,34 +90,53 @@
           </v-btn>
         </template>
         <SectionItemEdit
-          @closeDialogEvent="closeDialog"
+          @closeDialogEvent="closeEditDialog"
           :section="section"></SectionItemEdit>
       </v-dialog>
 
-      <v-btn text class="font-weight-bold darkerRed--text"> Delete </v-btn>
+      <v-dialog v-model="deleteDialog" persistent max-width="600px">
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn
+            text
+            class="font-weight-bold darkerRed--text"
+            v-bind="attrs"
+            v-on="on">
+            Delete
+          </v-btn>
+        </template>
+        <SectionItemDelete
+          @closeDialogEvent="closeDeleteDialog"
+          :section="section"></SectionItemDelete>
+      </v-dialog>
     </v-card-actions>
   </v-card>
 </template>
 
 <script>
   import SectionItemEdit from "./SectionItemEdit.vue";
+  import SectionItemDelete from "./SectionItemDelete.vue";
 
   export default {
     name: "SectionItem",
     data() {
       return {
-        dialog: false,
+        editDialog: false,
+        deleteDialog: false,
       };
     },
     components: {
       SectionItemEdit,
+      SectionItemDelete,
     },
     props: {
       section: Object,
     },
     methods: {
-      closeDialog(val) {
-        this.dialog = val;
+      closeEditDialog(val) {
+        this.editDialog = val;
+      },
+      closeDeleteDialog(val) {
+        this.deleteDialog = val;
       },
       createDOWString() {
         let ret = "";
