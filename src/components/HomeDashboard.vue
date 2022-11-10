@@ -14,7 +14,8 @@
                 :lg="sections.length < 4 ? 6 : 3"
                 :md="6"
                 :sm="6"
-                :xs="12">
+                :xs="12"
+              >
                 <SectionItem :section="section"></SectionItem>
               </v-col>
             </v-row>
@@ -42,7 +43,7 @@
 </template>
 
 <script>
-  import SectionItem from "./SectionItem.vue";
+import SectionItem from "./SectionItem.vue";
 
   export default {
     name: "HomeDashboard",
