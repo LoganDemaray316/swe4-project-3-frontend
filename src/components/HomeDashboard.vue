@@ -45,45 +45,47 @@
 <script>
 import SectionItem from "./SectionItem.vue";
 
-export default {
-  name: "HomeDashboard",
-  components: {
-    SectionItem,
-  },
-  data() {
-    return {
-      // Fake section data that will be replaced by a store getter to fill this list with section objects.
-      sections: [
-        {
-          sectionId: 0,
-          sectionNumber: "CMSC-2113",
-          sectionInstanceNumber: 1,
-          sectionClass: "Object Oriented Programming",
-          sectionStartTime: "10:00am",
-          sectionEndTime: "10:55am",
-          sectionDOW: ["M", "W", "F"],
-          sectionLocation: "PEC 213",
-          sectionSize: 30,
-          sectionDate: "08/06/2022 - 11/18/2022",
-          sectionSemester: "Fall",
-          sectionTerms: ["T1", "T2"],
-        },
-        {
-          sectionId: 1,
-          sectionNumber: "CMSC-2413",
-          sectionInstanceNumber: 1,
-          sectionClass: "Assembly Language",
-          sectionStartTime: "11:00am",
-          sectionEndTime: "11:55am",
-          sectionDOW: ["T", "TH"],
-          sectionLocation: "PEC 211",
-          sectionSize: 30,
-          sectionDate: "08/06/2022 - 11/18/2022",
-          sectionSemester: "Fall",
-          sectionTerms: ["T1", "T2"],
-        },
-      ],
-    };
-  },
-};
+  export default {
+    name: "HomeDashboard",
+    components: {
+      SectionItem,
+    },
+    data() {
+      return {
+        // Fake section data that will be replaced by a store getter to fill this list with section objects.
+        sections: [
+          {
+            sectionId: 0,
+            sectionNumber: "CMSC-2113",
+            sectionInstanceNumber: 1,
+            sectionName: "Object Oriented Programming",
+            sectionStartTime: "10:00am",
+            sectionEndTime: "10:55am",
+            sectionDOW: ["Monday", "Wednesday", "Friday"],
+            sectionLocation: "PEC 213",
+            sectionSize: 30,
+            sectionStartDate: "08/06/2022",
+            sectionEndDate: "11/18/2022",
+            sectionSemester: "Fall",
+            sectionTerms: ["T1", "T2"],
+          },
+          {
+            sectionId: 1,
+            sectionNumber: "CMSC-2413",
+            sectionInstanceNumber: 1,
+            sectionName: "Assembly Language",
+            sectionStartTime: "11:00am",
+            sectionEndTime: "11:55am",
+            sectionDOW: ["Tuesday", "Thursday"],
+            sectionLocation: "PEC 211",
+            sectionSize: 30,
+            sectionStartDate: "08/06/2022",
+            sectionEndDate: "11/18/2022",
+            sectionSemester: "Fall",
+            sectionTerms: ["T1", "T2"],
+          },
+        ],
+      };
+    },
+  };
 </script>
