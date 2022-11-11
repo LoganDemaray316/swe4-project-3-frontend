@@ -115,7 +115,6 @@
         this.snackbar = val[1];
         this.snackbarText = val[0];
         this.snackbarColor = val[2];
-        console.log("test");
       },
     },
   };
