@@ -20,7 +20,9 @@
         text
         class="font-weight-bold"
         color="darkerRed"
-        @click="closeDialog()">
+        @click="
+          closeDialog(), openSnackbar(section.sectionNumber + ' Deleted.')
+        ">
         Delete
       </v-btn>
       <v-spacer></v-spacer>
@@ -39,6 +41,9 @@
     methods: {
       closeDialog() {
         this.$emit("closeDialogEvent", false);
+      },
+      openSnackbar(val) {
+        this.$emit("openSnackbarEvent", [val, true]);
       },
     },
   };
