@@ -43,7 +43,7 @@
         this.$emit("closeDialogEvent", false);
       },
       openSnackbar(val) {
-        this.$emit("openSnackbarEvent", [val, true]);
+        this.$emit("openSnackbarEvent", [val, true, "lightRed"]);
       },
     },
   };

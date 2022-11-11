@@ -41,9 +41,10 @@
       </v-col>
     </v-row>
     <v-snackbar
+      class="font-weight-bold"
       v-model="snackbar"
       :timeout="timeout"
-      color="darkBlue white--text">
+      :color="snackbarColor">
       {{ snackbarText }}
 
       <template v-slot:action="{ attrs }">
@@ -106,12 +107,14 @@
         timeout: 2000,
         snackbar: false,
         snackbarText: "",
+        snackbarColor: "darkBlue",
       };
     },
     methods: {
       openSnackBar(val) {
         this.snackbar = val[1];
         this.snackbarText = val[0];
+        this.snackbarColor = val[2];
         console.log("test");
       },
     },
