@@ -1,10 +1,10 @@
 <template>
   <v-card elevation="2" class="lightBlue">
     <v-card-title class="font-weight-bold lightBlue white--text">
-      {{ section.sectionClass }}
+      {{ course.courseClass }}
     </v-card-title>
     <v-card-subtitle class="font-weight-bold darkBlue--text pb-0">
-      {{ section.sectionNumber + "-" + section.sectionInstanceNumber }}
+      {{ course.courseNumber + "-" + course.courseInstanceNumber }}
     </v-card-subtitle>
 
     <v-chip-group column class="mx-4 my-2">
@@ -16,7 +16,7 @@
           class="darkBlue--text mr-2"
           icon="fa-solid fa-clock"
         />
-        {{ section.sectionHours }}
+        {{ course.courseHours }}
       </v-chip>
       <v-chip
         :ripple="false"
@@ -26,12 +26,12 @@
           class="darkBlue--text mr-2"
           icon="fa-solid fa-calendar-days"
         />
-        {{ section.sectionSemester }}
+        {{ course.courseSemester }}
       </v-chip>
       <v-chip
         :ripple="false"
         class="font-weight-bold white darkBlue--text"
-        v-if="section.sectionLab"
+        v-if="course.courseLab"
       >
         <font-awesome-icon
           class="darkBlue--text mr-2"
@@ -44,7 +44,7 @@
       <v-list-item-group>
         <v-list-item
           class="font-weight-bold darkBlue--text"
-          v-if="section.sectionHasPrereq"
+          v-if="course.courseHasPrereq"
         >
           <v-list-item-icon class="mr-2">
             <font-awesome-icon
@@ -53,7 +53,7 @@
             />
           </v-list-item-icon>
           <v-list-item-content>
-            {{ section.sectionPrereq }}
+            {{ course.coursePrereq }}
           </v-list-item-content>
         </v-list-item>
 
@@ -61,7 +61,7 @@
 
         <v-list-item class="font-weight-bold darkBlue--text">
           <v-list-item-content>
-            {{ section.sectionDescription }}
+            {{ course.courseDescription }}
           </v-list-item-content>
         </v-list-item>
       </v-list-item-group>
@@ -76,9 +76,9 @@
 
 <script>
 export default {
-  name: "SectionItem",
+  name: "courseItem",
   props: {
-    section: Object,
+    course: Object,
   },
 };
 </script>
