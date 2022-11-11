@@ -9,6 +9,19 @@
         single-line
         hide-details
       ></v-text-field>
+      <v-dialog v-model="editDialog" persistent max-width="600px">
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn
+            text
+            class="font-weight-bold darkBlue--text"
+            v-bind="attrs"
+            v-on="on"
+          >
+            Edit
+          </v-btn>
+        </template>
+        <CourseItemCreate></CourseItemCreate>
+      </v-dialog>
       <v-btn color="darkBlue" plain v-on:click="filterShowing = !filterShowing">
         <font-awesome-icon
           class="darkBlue--text"
@@ -120,11 +133,13 @@
 
 <script>
 import CourseItem from "./CourseItem.vue";
+import CourseItemCreate from "./CourseItemCreate.vue";
 
 export default {
   name: "HomeDashboard",
   components: {
     CourseItem,
+    CourseItemCreate,
   },
   data() {
     return {
