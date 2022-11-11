@@ -100,14 +100,14 @@
           <v-container fluid>
             <v-row dense>
               <v-col
-                v-for="section in sections"
-                :key="section.sectionId"
+                v-for="course in courses"
+                :key="course.courseId"
                 :lg="6"
                 :md="6"
                 :sm="12"
                 :xs="12"
               >
-                <CourseItem :section="section"></CourseItem>
+                <CourseItem :course="course"></CourseItem>
               </v-col>
             </v-row>
           </v-container>
@@ -129,46 +129,46 @@ export default {
   data() {
     return {
       filterShowing: false,
-      // Fake section data that will be replaced by a store getter to fill this list with section objects.
-      sections: [
+      // Fake course data that will be replaced by a store getter to fill this list with course objects.
+      courses: [
         {
-          sectionId: 0,
-          sectionNumber: "CMSC-2113",
-          sectionInstanceNumber: 1,
-          sectionClass: "Object Oriented Programming",
-          sectionStartTime: "10:00am",
-          sectionEndTime: "10:55am",
-          sectionDOW: ["M", "W", "F"],
-          sectionLocation: "PEC 213",
-          sectionSize: 30,
-          sectionDate: "08/06/2022 - 11/18/2022",
-          sectionSemester: "Fall",
-          sectionTerms: ["T1", "T2"],
-          sectionLab: true,
-          sectionHours: 3,
-          sectionHasPrereq: true,
-          sectionPrereq: "CMSC-1111",
-          sectionDescription:
+          courseId: 0,
+          courseNumber: "CMSC-2113",
+          courseInstanceNumber: 1,
+          courseClass: "Object Oriented Programming",
+          courseStartTime: "10:00am",
+          courseEndTime: "10:55am",
+          courseDOW: ["M", "W", "F"],
+          courseLocation: "PEC 213",
+          courseSize: 30,
+          courseDate: "08/06/2022 - 11/18/2022",
+          courseSemester: "Fall",
+          courseTerms: ["T1", "T2"],
+          courseLab: true,
+          courseHours: 3,
+          courseHasPrereq: true,
+          coursePrereq: "CMSC-1111",
+          courseDescription:
             "Here is the long description that no student has ever read and then takes the class without looking it over and regrets it because they thought it would be easy.",
         },
         {
-          sectionId: 1,
-          sectionNumber: "CMSC-2413",
-          sectionInstanceNumber: 1,
-          sectionClass: "Assembly Language",
-          sectionStartTime: "11:00am",
-          sectionEndTime: "11:55am",
-          sectionDOW: ["T", "TH"],
-          sectionLocation: "PEC 211",
-          sectionSize: 30,
-          sectionDate: "08/06/2022 - 11/18/2022",
-          sectionSemester: "Fall",
-          sectionTerms: ["T1", "T2"],
-          sectionLab: false,
-          sectionHours: 3,
-          sectionHasPrereq: false,
-          sectionPrereq: "",
-          sectionDescription:
+          courseId: 1,
+          courseNumber: "CMSC-2413",
+          courseInstanceNumber: 1,
+          courseClass: "Assembly Language",
+          courseStartTime: "11:00am",
+          courseEndTime: "11:55am",
+          courseDOW: ["T", "TH"],
+          courseLocation: "PEC 211",
+          courseSize: 30,
+          courseDate: "08/06/2022 - 11/18/2022",
+          courseSemester: "Fall",
+          courseTerms: ["T1", "T2"],
+          courseLab: false,
+          courseHours: 3,
+          courseHasPrereq: false,
+          coursePrereq: "",
+          courseDescription:
             "Here is the long description that no student has ever read and then takes the class without looking it over and regrets it because they thought it would be easy.",
         },
       ],
