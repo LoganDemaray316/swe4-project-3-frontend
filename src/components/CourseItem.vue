@@ -4,7 +4,7 @@
       {{ course.courseClass }}
     </v-card-title>
     <v-card-subtitle class="font-weight-bold darkBlue--text pb-0">
-      {{ course.courseNumber + "-" + course.courseInstanceNumber }}
+      {{ course.courseNumber }}
     </v-card-subtitle>
 
     <v-chip-group column class="mx-4 my-2">
@@ -16,7 +16,7 @@
           class="darkBlue--text mr-2"
           icon="fa-solid fa-clock"
         />
-        {{ course.courseHours }}
+        {{ course.courseNumber.slice(-1) }}
       </v-chip>
       <v-chip
         :ripple="false"
@@ -26,7 +26,7 @@
           class="darkBlue--text mr-2"
           icon="fa-solid fa-calendar-days"
         />
-        {{ course.courseSemester }}
+        {{ createSemesterString() }}
       </v-chip>
       <v-chip
         :ripple="false"
@@ -39,26 +39,20 @@
         />
         {{ "LAB" }}
       </v-chip>
+      <v-chip
+        :ripple="false"
+        class="font-weight-bold white darkBlue--text"
+        v-if="course.coursePrereq != ''"
+      >
+        <font-awesome-icon
+          class="darkBlue--text mr-2"
+          icon="fa-solid fa-circle-exclamation"
+        />
+        {{ course.coursePrereq }}
+      </v-chip>
     </v-chip-group>
     <v-list disabled class="white darkBlue--text pt-0 pb-0">
       <v-list-item-group>
-        <v-list-item
-          class="font-weight-bold darkBlue--text"
-          v-if="course.courseHasPrereq"
-        >
-          <v-list-item-icon class="mr-2">
-            <font-awesome-icon
-              class="darkBlue--text"
-              icon="fa-solid fa-circle-exclamation"
-            />
-          </v-list-item-icon>
-          <v-list-item-content>
-            {{ course.coursePrereq }}
-          </v-list-item-content>
-        </v-list-item>
-
-        <v-divider class="lightGray"></v-divider>
-
         <v-list-item class="font-weight-bold darkBlue--text">
           <v-list-item-content>
             {{ course.courseDescription }}
@@ -68,17 +62,83 @@
       <v-divider class="lightGray"></v-divider>
     </v-list>
     <v-card-actions class="white">
-      <v-btn text class="font-weight-bold darkBlue--text"> Edit </v-btn>
-      <v-btn text class="font-weight-bold darkerRed--text"> Delete </v-btn>
+      <v-dialog v-model="editDialog" persistent max-width="600px">
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn
+            text
+            class="font-weight-bold darkBlue--text"
+            v-bind="attrs"
+            v-on="on"
+          >
+            Edit
+          </v-btn>
+        </template>
+        <CourseItemEdit
+          @closeCourseDialogEvent="closeEditDialog"
+          @openCourseSnackbarEvent="openSnackBar"
+          :course="course"
+        ></CourseItemEdit>
+      </v-dialog>
+      <v-dialog v-model="deleteDialog" persistent max-width="600px">
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn
+            text
+            class="font-weight-bold darkerRed--text"
+            v-bind="attrs"
+            v-on="on"
+          >
+            Delete
+          </v-btn>
+        </template>
+        <CourseItemDelete
+          @closeCourseDialogEvent="closeDeleteDialog"
+          @openCourseSnackbarEvent="openSnackBar"
+          :course="course"
+        ></CourseItemDelete>
+      </v-dialog>
     </v-card-actions>
   </v-card>
 </template>
 
 <script>
+import CourseItemEdit from "./CourseItemEdit.vue";
+import CourseItemDelete from "./CourseItemDelete.vue";
+
 export default {
   name: "courseItem",
+  data() {
+    return {
+      editDialog: false,
+      deleteDialog: false,
+    };
+  },
+  components: {
+    CourseItemEdit,
+    CourseItemDelete,
+  },
   props: {
     course: Object,
+  },
+  methods: {
+    closeEditDialog(val) {
+      this.editDialog = val;
+    },
+    closeDeleteDialog(val) {
+      this.deleteDialog = val;
+    },
+    openSnackBar(val) {
+      this.$emit("openCourseSnackbarEvent", val);
+    },
+    createSemesterString() {
+      let ret = "";
+      for (var i = 0; i < this.course.courseSemester.length; i++) {
+        if (i > 0) {
+          ret += ", ";
+        }
+        ret += this.course.courseSemester[i];
+      }
+      return ret.trim();
+    },
   },
 };
 </script>
