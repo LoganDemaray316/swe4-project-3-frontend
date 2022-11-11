@@ -91,6 +91,7 @@
         </template>
         <SectionItemEdit
           @closeDialogEvent="closeEditDialog"
+          @openSnackbarEvent="openSnackBar"
           :section="section"></SectionItemEdit>
       </v-dialog>
 
@@ -106,6 +107,7 @@
         </template>
         <SectionItemDelete
           @closeDialogEvent="closeDeleteDialog"
+          @openSnackbarEvent="openSnackBar"
           :section="section"></SectionItemDelete>
       </v-dialog>
     </v-card-actions>
@@ -137,6 +139,11 @@
       },
       closeDeleteDialog(val) {
         this.deleteDialog = val;
+      },
+      openSnackBar(val) {
+        console.log(val[0]);
+
+        this.$emit("openSnackbarEvent", val);
       },
       createDOWString() {
         let ret = "";

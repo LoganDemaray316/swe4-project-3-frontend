@@ -271,7 +271,7 @@
         text
         class="font-weight-bold"
         color="darkerGreen"
-        @click="closeDialog()"
+        @click="closeDialog(), openSnackbar(section.sectionNumber + ' Saved.')"
         >Save</v-btn
       >
     </v-card-actions>
@@ -336,6 +336,9 @@
     methods: {
       closeDialog() {
         this.$emit("closeDialogEvent", false);
+      },
+      openSnackbar(val) {
+        this.$emit("openSnackbarEvent", [val, true, "lightGreen"]);
       },
       parseDate(date) {
         if (!date) return null;

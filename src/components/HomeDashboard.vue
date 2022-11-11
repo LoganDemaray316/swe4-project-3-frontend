@@ -14,9 +14,10 @@
                 :lg="sections.length < 4 ? 6 : 3"
                 :md="6"
                 :sm="6"
-                :xs="12"
-              >
-                <SectionItem :section="section"></SectionItem>
+                :xs="12">
+                <SectionItem
+                  :section="section"
+                  @openSnackbarEvent="openSnackBar"></SectionItem>
               </v-col>
             </v-row>
           </v-container>
@@ -39,11 +40,29 @@
         </v-card>
       </v-col>
     </v-row>
+    <v-snackbar
+      class="font-weight-bold"
+      v-model="snackbar"
+      :timeout="timeout"
+      :color="snackbarColor">
+      {{ snackbarText }}
+
+      <template v-slot:action="{ attrs }">
+        <v-btn
+          color="white"
+          text
+          v-bind="attrs"
+          @click="snackbar = false"
+          class="font-weight-bold">
+          Close
+        </v-btn>
+      </template>
+    </v-snackbar>
   </v-container>
 </template>
 
 <script>
-import SectionItem from "./SectionItem.vue";
+  import SectionItem from "./SectionItem.vue";
 
   export default {
     name: "HomeDashboard",
@@ -85,7 +104,18 @@ import SectionItem from "./SectionItem.vue";
             sectionTerms: ["T1", "T2"],
           },
         ],
+        timeout: 2000,
+        snackbar: false,
+        snackbarText: "",
+        snackbarColor: "darkBlue",
       };
+    },
+    methods: {
+      openSnackBar(val) {
+        this.snackbar = val[1];
+        this.snackbarText = val[0];
+        this.snackbarColor = val[2];
+      },
     },
   };
 </script>
