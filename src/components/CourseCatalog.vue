@@ -9,6 +9,26 @@
         single-line
         hide-details
       ></v-text-field>
+      <v-dialog v-model="createDialog" persistent max-width="600px">
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn
+            text
+            class="font-weight-bold darkBlue--text"
+            v-bind="attrs"
+            v-on="on"
+          >
+            <font-awesome-icon
+              class="darkBlue--text mr-2"
+              icon="fa-solid fa-plus"
+              size="xl"
+            />
+          </v-btn>
+        </template>
+        <CourseItemCreate
+          @closeCourseDialogEvent="closeCreateDialog"
+          @openCourseSnackbarEvent="openCourseSnackbar"
+        ></CourseItemCreate>
+      </v-dialog>
       <v-btn color="darkBlue" plain v-on:click="filterShowing = !filterShowing">
         <font-awesome-icon
           class="darkBlue--text"
@@ -107,7 +127,10 @@
                 :sm="12"
                 :xs="12"
               >
-                <CourseItem :course="course"></CourseItem>
+                <CourseItem
+                  :course="course"
+                  @openCourseSnackbarEvent="openCourseSnackbar"
+                ></CourseItem>
               </v-col>
             </v-row>
           </v-container>
@@ -115,31 +138,56 @@
       </v-col>
     </v-row>
     <v-pagination v-model="page" :length="6"></v-pagination>
+    <v-snackbar
+      class="font-weight-bold"
+      v-model="snackbar"
+      :timeout="timeout"
+      :color="snackbarColor"
+    >
+      {{ snackbarText }}
+
+      <template v-slot:action="{ attrs }">
+        <v-btn
+          color="white"
+          text
+          v-bind="attrs"
+          @click="snackbar = false"
+          class="font-weight-bold"
+        >
+          Close
+        </v-btn>
+      </template>
+    </v-snackbar>
   </v-container>
 </template>
 
 <script>
 import CourseItem from "./CourseItem.vue";
+import CourseItemCreate from "./CourseItemCreate.vue";
 
 export default {
-  name: "HomeDashboard",
+  name: "CourseCatalog",
   components: {
     CourseItem,
+    CourseItemCreate,
   },
   data() {
     return {
+      createDialog: false,
+      deleteDialog: false,
       filterShowing: false,
+      timeout: 2000,
+      snackbar: false,
+      snackbarText: "",
+      snackbarColor: "darkBlue",
       // Fake course data that will be replaced by a store getter to fill this list with course objects.
       courses: [
         {
           courseId: 0,
           courseNumber: "CMSC-2113",
           courseClass: "Object Oriented Programming",
-          courseSemester: "Fall",
-          courseTerms: ["T1", "T2"],
+          courseSemester: ["Fall"],
           courseLab: true,
-          courseHours: 3,
-          courseHasPrereq: true,
           coursePrereq: "CMSC-1111",
           courseDescription:
             "Here is the long description that no student has ever read and then takes the class without looking it over and regrets it because they thought it would be easy.",
@@ -148,17 +196,27 @@ export default {
           courseId: 1,
           courseNumber: "CMSC-2413",
           courseClass: "Assembly Language",
-          courseSemester: "Fall",
-          courseTerms: ["T1", "T2"],
+          courseSemester: ["Fall", "Spring"],
           courseLab: false,
-          courseHours: 3,
-          courseHasPrereq: false,
           coursePrereq: "",
           courseDescription:
             "Here is the long description that no student has ever read and then takes the class without looking it over and regrets it because they thought it would be easy.",
         },
       ],
     };
+  },
+  methods: {
+    closeCreateDialog(val) {
+      this.createDialog = val;
+    },
+    closeDeleteDialog(val) {
+      this.deleteDialog = val;
+    },
+    openCourseSnackbar(val) {
+      this.snackbar = val[1];
+      this.snackbarText = val[0];
+      this.snackbarColor = val[2];
+    },
   },
 };
 </script>
