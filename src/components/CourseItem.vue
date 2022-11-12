@@ -26,7 +26,7 @@
           class="darkBlue--text mr-2"
           icon="fa-solid fa-calendar-days"
         />
-        {{ createSemesterString() }}
+        {{ course.courseSemester.join(", ") }}
       </v-chip>
       <v-chip
         :ripple="false"
@@ -128,16 +128,6 @@ export default {
     },
     openSnackBar(val) {
       this.$emit("openCourseSnackbarEvent", val);
-    },
-    createSemesterString() {
-      let ret = "";
-      for (var i = 0; i < this.course.courseSemester.length; i++) {
-        if (i > 0) {
-          ret += ", ";
-        }
-        ret += this.course.courseSemester[i];
-      }
-      return ret.trim();
     },
   },
 };
