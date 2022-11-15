@@ -25,7 +25,7 @@
         width="40"
       />
 
-      <v-toolbar-title class="font-weight-bold"
+      <v-toolbar-title class="font-weight-bold darkBlue--text"
         >SECTION PLANNER</v-toolbar-title
       >
       <v-spacer></v-spacer>

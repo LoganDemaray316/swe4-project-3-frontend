@@ -1,5 +1,21 @@
 <template>
   <div class="signup-buttons">
+    <br /><br />
+    <br /><br />
+    <br /><br />
+    <v-row justify="center">
+      <v-img
+        alt="OC Logo"
+        class="shrink mr-4"
+        contain
+        src="../assets/OC_LOGO_BLUE.svg"
+        transition="scale-transition"
+        fill="#627985"
+      />
+      <v-toolbar-title class="font-weight-bold darkBlue--text"
+        >SECTION PLANNER</v-toolbar-title
+      >
+    </v-row>
     <v-row justify="center">
       <div display="flex" id="parent_id"></div>
     </v-row>
