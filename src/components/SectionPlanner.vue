@@ -40,18 +40,6 @@
                             value="darkBlue"
                         ></v-checkbox>
                     </v-card-text>
-                    
-                     <!--    <v-container fluid>  Department, faculty, room
-                            <v-row dense>
-                                <v-col 
-                                    v-for="dept in departments"
-                                    :key="dept.deptID"
-                                <DepartmentItem
-                                    :dept="dept"
-                                    @openSnackbarEvent="openSnackBar"></DepartmentItem>
-                                </v-col>
-                            </v-row>
-                    </v-container> -->
                 </v-card>
             </v-col>
                    <!--  <v-row
