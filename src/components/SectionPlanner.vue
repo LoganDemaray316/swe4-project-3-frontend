@@ -1,22 +1,60 @@
 <template>
-    <div>
-        <v-container
-            fill-height
-            fluid
-            >
-             <v-row>
-                <v-col cols="3">
-                    <v-row
+    <v-container fluid>
+        <v-row>
+            <v-col cols="3">
+                <v-card>
+                    <v-card-title class="font-weight-bold white--text darkBlue">
+                        FILTERS
+                    </v-card-title>
+                    <v-card-text></v-card-text>
+                    <v-card-text class="font-weight-1 darkBlue--text lightBlue">
+                        Department
+                    </v-card-text>
+                    <v-card-text>
+                        <v-checkbox
+                            v-model="checkbox"
+                            label="CMSC"
+                            color="darkBlue"
+                            value="darkBlue"
+                        ></v-checkbox>
+                    </v-card-text>
+                    <v-card-text class="font-weight-1 darkBlue--text lightBlue">
+                        Faculty
+                    </v-card-text>
+                    <v-card-text>
+                        <v-checkbox
+                            v-model="checkbox"
+                            label="CMSC"
+                            color="darkBlue"
+                            value="darkBlue"
+                        ></v-checkbox>
+                    </v-card-text>
+                    <v-card-text class="font-weight-1 darkBlue--text lightBlue">
+                        Room
+                    </v-card-text>
+                    <v-card-text>
+                        <v-checkbox
+                            v-model="checkbox"
+                            label="CMSC"
+                            color="darkBlue"
+                            value="darkBlue"
+                        ></v-checkbox>
+                    </v-card-text>
+                </v-card>
+            </v-col>
+                   <!--  <v-row
                         v-for="filter in filters"
                         :key="filter.filterId"
                         no-gutters
                     >
                         <v-col cols=“1”>
                             {{filter.filterTitle}}
+                            
                         </v-col>
                     </v-row>
-                </v-col>
+                </v-col> -->
                 <v-col cols="9">
+                    <v-card>
                     <v-calendar
                         ref="calendar"
                         :now="today"
@@ -26,10 +64,10 @@
                         type="week"
                     >
                     </v-calendar>
+                    </v-card>
                 </v-col>
             </v-row>
         </v-container>
-    </div>
 </template>
   
 <script>
@@ -41,6 +79,16 @@
             'center',
             'end',
         ],
+
+        filters: [
+            'Department',
+            'Faculty',
+            'Room',
+        ],
+/* 
+        return [
+            checkbox: true,
+        ], */
         
         //today: '2022-11-09',
         //sections: [],
