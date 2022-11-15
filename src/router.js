@@ -11,6 +11,10 @@ const routerOptions = [
     component: "HomeDashboard",
   },
   {
+    path: "/SectionPlanner",
+    component: "SectionPlanner",
+  },
+  {
     path: "/CourseCatalog",
     component: "CourseCatalog",
   },

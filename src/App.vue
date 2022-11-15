@@ -56,7 +56,7 @@ export default {
     sidebar: false,
     menuItems: [
       { title: "Dashboard", path: "/HomeDashboard" },
-      { title: "Section Planner", path: "/" },
+      { title: "Section Planner", path: "/SectionPlanner" },
       { title: "Course Catalog", path: "/CourseCatalog" },
     ],
   }),
