@@ -13,8 +13,9 @@
                     append-icon="mdi-magnify"
                     label="Search"
                     single-line
-                    hide-details>
-                  </v-text-field>
+                    hide-details
+                    clearable
+                  ></v-text-field>
                   <v-card-text></v-card-text>
                   <v-select
                     ref="dept"
@@ -23,6 +24,7 @@
                     :menu-props="{maxHeight: '400'}"
                     label="Department"
                     multiple dense solo
+                    clearable
                   ></v-select>
                   <v-select
                     ref="faculty"
@@ -31,6 +33,7 @@
                     :menu-props="{maxHeight: '400'}"
                     label="Faculty"
                     multiple dense solo
+                    clearable
                   ></v-select>
                   <v-select
                     ref="room"
@@ -39,6 +42,7 @@
                     :menu-props="{maxHeight: '400'}"
                     label="Room"
                     multiple dense solo
+                    clearable
                   ></v-select>
                   <v-select
                     ref="daysOfWeek"
@@ -47,8 +51,10 @@
                     :menu-props="{maxHeight: '400'}"
                     label="Days of Week"
                     multiple dense solo
+                    clearable
                   ></v-select>
-                  <v-btn class="font-weight-bold white--text lightBlue">
+                  
+                  <v-btn class="font-weight-bold white--text lightBlue" @click="clearInput">
                     Clear Filters
                   </v-btn>
               </v-card>
@@ -78,7 +84,7 @@
       alignments: ['start','center','end'],
       departments: ['CMSC','COMM','MUSC',],
       facultyMembers: ['David North','Brian Simmons','Kyle Pullen'],
-      rooms: ['233','231','228'],
+      rooms: ['PEC233','GC117','GC128'],
       daysOptions: ['Monday','Tuesday','Wednesday','Thursday','Friday',],
 
       events: [
@@ -100,10 +106,21 @@
         // Determine which days a class is and display them on those days
 
         // If (specificDepartment chosen), show these professors and rooms in department
+        /*filterDept(department) {
+          if(department = "CMSC") {
+            
+          }
+        },*/
+
         // If (specificProfessor chosen), show these departments and rooms taught by professor
         // If (specificRoom chosen), show these departments and professors using this room
         // If (specificDay || specificDays chosen), show the classes these days
         // If search made, refer key term to department, professor, room, or day
+      
+        // If 'Clear Filters' button clicked, clear all filters
+        /*clearInput() {
+          this.$refs.inputRef.clearableCallback();
+        }*/
       ]
       }),
   };
