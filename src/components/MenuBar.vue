@@ -26,7 +26,11 @@
           :to="item.path">
           {{ item.title }}
         </v-btn>
-        <v-btn color="white" plain v-on:click="logout()">
+        <v-btn
+          class="font-weight-bold"
+          color="white"
+          plain
+          v-on:click="logout()">
           {{ "LOGOUT" }}
         </v-btn>
       </v-toolbar-items>
@@ -85,12 +89,7 @@
         this.role = this.user.role;
       }
 
-      for (var i = 0; i < this.menuItems.length; i++) {
-        const item = this.menuItems[i];
-        if (item.roles.includes(this.role)) {
-          this.menuItemsForRole.push(item);
-        }
-      }
+      this.setMenu();
     },
     computed: {
       theme() {
@@ -104,7 +103,19 @@
         }
       },
     },
+    mounted() {
+      this.setMenu();
+    },
     methods: {
+      setMenu() {
+        this.menuItemsForRole = [];
+        for (var i = 0; i < this.menuItems.length; i++) {
+          const item = this.menuItems[i];
+          if (item.roles.includes(this.role)) {
+            this.menuItemsForRole.push(item);
+          }
+        }
+      },
       setRoles() {
         this.user = Utils.getStore("user");
         if (this.user != null) {
