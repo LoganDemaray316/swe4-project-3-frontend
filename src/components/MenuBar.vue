@@ -25,6 +25,9 @@
           :to="item.path">
           {{ item.title }}
         </v-btn>
+        <v-btn color="white" plain v-on:click="logout()">
+          {{ "LOGOUT" }}
+        </v-btn>
       </v-toolbar-items>
     </v-app-bar>
 
@@ -37,16 +40,23 @@
           :to="item.path">
           <v-list-item-content>{{ item.title }}</v-list-item-content>
         </v-list-item>
+        <v-list-item v-on:click="logout()">
+          {{ "Logout" }}
+        </v-list-item>
       </v-list>
     </v-navigation-drawer>
   </v-container>
 </template>
 <script>
+  import Utils from "@/config/utils.js";
+  import AuthServices from "@/services/authServices.js";
   export default {
     name: "MenuBar",
+    userFeatures: ["LOGOUT"],
     data: () => ({
       title: "SECTION PLANNER",
       drawer: false,
+      userName: "",
       menuItems: [
         { title: "Dashboard", path: "/HomeDashboard" },
         { title: "Section Planner", path: "/SectionPlanner" },
@@ -63,6 +73,28 @@
         } else {
           return true;
         }
+      },
+    },
+    async created() {
+      // ensures that their name gets set properly from store
+      this.user = Utils.getStore("user");
+      if (this.user != null) {
+        this.userName = this.user.fName + " " + this.user.lName;
+      }
+    },
+    methods: {
+      logout: function () {
+        const user = Utils.getStore("user");
+        AuthServices.logoutUser(user)
+          .then((response) => {
+            console.log(response);
+            Utils.removeItem("user");
+            this.$router.go();
+            this.$router.push({ name: "login" });
+          })
+          .catch((error) => {
+            console.log("error", error);
+          });
       },
     },
   };
