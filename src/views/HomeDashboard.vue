@@ -62,7 +62,7 @@
 </template>
 
 <script>
-  import SectionItem from "./SectionItem.vue";
+  import SectionItem from "../components/SectionItem.vue";
 
   export default {
     name: "HomeDashboard",
