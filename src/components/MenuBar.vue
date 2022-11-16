@@ -18,9 +18,10 @@
       <v-spacer></v-spacer>
       <v-toolbar-items class="hidden-sm-and-down">
         <v-btn
+          class="font-weight-bold"
           color="white"
           plain
-          v-for="item in menuItems"
+          v-for="item in menuItemsForRole"
           :key="item.title"
           :to="item.path">
           {{ item.title }}
@@ -32,7 +33,7 @@
       <v-list>
         <v-list-item
           exact
-          v-for="item in menuItems"
+          v-for="item in menuItemsForRole"
           :key="item.title"
           :to="item.path">
           <v-list-item-content>{{ item.title }}</v-list-item-content>
@@ -42,17 +43,48 @@
   </v-container>
 </template>
 <script>
+  import Utils from "../config/utils.js";
+
   export default {
     name: "MenuBar",
     data: () => ({
       title: "SECTION PLANNER",
+      name: "",
+      role: "",
       drawer: false,
       menuItems: [
-        { title: "Dashboard", path: "/HomeDashboard" },
-        { title: "Section Planner", path: "/SectionPlanner" },
-        { title: "Course Catalog", path: "/CourseCatalog" },
+        {
+          title: "Dashboard",
+          path: "/HomeDashboard",
+          roles: ["admin", "faculty", "chair"],
+        },
+        {
+          title: "Section Planner",
+          path: "/SectionPlanner",
+          roles: ["admin", "faculty", "chair"],
+        },
+        {
+          title: "Course Catalog",
+          path: "/CourseCatalog",
+          roles: ["admin", "faculty", "chair"],
+        },
       ],
+      menuItemsForRole: [],
     }),
+    async created() {
+      this.user = Utils.getStore("user");
+      if (this.user != null) {
+        this.name = this.user.fname + " " + this.user.lname;
+        this.role = this.user.role;
+      }
+
+      for (var i = 0; i < this.menuItems.length; i++) {
+        const item = this.menuItems[i];
+        if (item.roles.includes(this.role)) {
+          this.menuItemsForRole.push(item);
+        }
+      }
+    },
     computed: {
       theme() {
         return this.$vuetify.theme.dark ? "dark" : "light";
@@ -62,6 +94,16 @@
           return false;
         } else {
           return true;
+        }
+      },
+    },
+    methods: {
+      setRoles() {
+        this.user = Utils.getStore("user");
+        if (this.user != null) {
+          this.name = this.user.fname + " " + this.user.lname;
+          this.role = this.user.role;
+          console.log(this.role);
         }
       },
     },
