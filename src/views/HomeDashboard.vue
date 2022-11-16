@@ -5,8 +5,13 @@
         <v-card>
           <v-card-title class="font-weight-bold white--text darkBlue">
             YOUR SECTIONS
+            <v-btn icon @click="triggerDownload()">
+              <font-awesome-icon
+                icon="fa-solid fa-download"
+                class="white--text" />
+            </v-btn>
           </v-card-title>
-          <v-container fluid>
+          <v-container fluid ref="content">
             <v-row dense>
               <v-col
                 v-for="section in sections"
@@ -63,6 +68,8 @@
 
 <script>
   import SectionItem from "../components/SectionItem.vue";
+  import jsPDF from "jspdf";
+  import html2canvas from "html2canvas";
 
   export default {
     name: "HomeDashboard",
@@ -115,6 +122,31 @@
         this.snackbar = val[1];
         this.snackbarText = val[0];
         this.snackbarColor = val[2];
+      },
+      triggerDownload() {
+        const doc = new jsPDF({
+          orientation: "l",
+          unit: "px",
+          format: "a4",
+          hotfixes: ["px_scaling"],
+        });
+        // Searches for a ref value of 'content' and generates the download from that
+        html2canvas(this.$refs.content, {
+          width: doc.internal.pageSize.getWidth(),
+          height: doc.internal.pageSize.getHeight(),
+        }).then((canvas) => {
+          const img = canvas.toDataURL("image/png");
+
+          doc.addImage(
+            img,
+            "PNG",
+            0,
+            0,
+            doc.internal.pageSize.getWidth(),
+            doc.internal.pageSize.getHeight()
+          );
+          doc.save("yourSectionsDownload.pdf");
+        });
       },
     },
   };
