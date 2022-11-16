@@ -3,12 +3,14 @@
     <v-row>
       <v-col cols="12">
         <v-card>
+          <SimpleUpload></SimpleUpload>
           <v-card-title class="font-weight-bold white--text darkBlue">
             YOUR SECTIONS
             <v-btn icon @click="triggerDownload()">
               <font-awesome-icon
                 icon="fa-solid fa-download"
-                class="white--text" />
+                class="white--text"
+              />
             </v-btn>
           </v-card-title>
           <v-container fluid ref="content">
@@ -19,10 +21,12 @@
                 :lg="sections.length < 4 ? 6 : 3"
                 :md="6"
                 :sm="6"
-                :xs="12">
+                :xs="12"
+              >
                 <SectionItem
                   :section="section"
-                  @openSnackbarEvent="openSnackBar"></SectionItem>
+                  @openSnackbarEvent="openSnackBar"
+                ></SectionItem>
               </v-col>
             </v-row>
           </v-container>
@@ -49,7 +53,8 @@
       class="font-weight-bold"
       v-model="snackbar"
       :timeout="timeout"
-      :color="snackbarColor">
+      :color="snackbarColor"
+    >
       {{ snackbarText }}
 
       <template v-slot:action="{ attrs }">
@@ -58,7 +63,8 @@
           text
           v-bind="attrs"
           @click="snackbar = false"
-          class="font-weight-bold">
+          class="font-weight-bold"
+        >
           Close
         </v-btn>
       </template>
@@ -67,87 +73,89 @@
 </template>
 
 <script>
-  import SectionItem from "../components/SectionItem.vue";
-  import jsPDF from "jspdf";
-  import html2canvas from "html2canvas";
+import SectionItem from "../components/SectionItem.vue";
+import jsPDF from "jspdf";
+import html2canvas from "html2canvas";
+import SimpleUpload from "@/components/SimpleUpload.vue";
 
-  export default {
-    name: "HomeDashboard",
-    components: {
-      SectionItem,
+export default {
+  name: "HomeDashboard",
+  components: {
+    SectionItem,
+    SimpleUpload,
+  },
+  data() {
+    return {
+      // Fake section data that will be replaced by a store getter to fill this list with section objects.
+      sections: [
+        {
+          sectionId: 0,
+          sectionNumber: "CMSC-2113",
+          sectionInstanceNumber: 1,
+          sectionName: "Object Oriented Programming",
+          sectionStartTime: "10:00am",
+          sectionEndTime: "10:55am",
+          sectionDOW: ["Monday", "Wednesday", "Friday"],
+          sectionLocation: "PEC 213",
+          sectionSize: 30,
+          sectionStartDate: "08/06/2022",
+          sectionEndDate: "11/18/2022",
+          sectionSemester: "Fall",
+          sectionTerms: ["T1", "T2"],
+        },
+        {
+          sectionId: 1,
+          sectionNumber: "CMSC-2413",
+          sectionInstanceNumber: 1,
+          sectionName: "Assembly Language",
+          sectionStartTime: "11:00am",
+          sectionEndTime: "11:55am",
+          sectionDOW: ["Tuesday", "Thursday"],
+          sectionLocation: "PEC 211",
+          sectionSize: 30,
+          sectionStartDate: "08/06/2022",
+          sectionEndDate: "11/18/2022",
+          sectionSemester: "Fall",
+          sectionTerms: ["T1", "T2"],
+        },
+      ],
+      timeout: 2000,
+      snackbar: false,
+      snackbarText: "",
+      snackbarColor: "darkBlue",
+    };
+  },
+  methods: {
+    openSnackBar(val) {
+      this.snackbar = val[1];
+      this.snackbarText = val[0];
+      this.snackbarColor = val[2];
     },
-    data() {
-      return {
-        // Fake section data that will be replaced by a store getter to fill this list with section objects.
-        sections: [
-          {
-            sectionId: 0,
-            sectionNumber: "CMSC-2113",
-            sectionInstanceNumber: 1,
-            sectionName: "Object Oriented Programming",
-            sectionStartTime: "10:00am",
-            sectionEndTime: "10:55am",
-            sectionDOW: ["Monday", "Wednesday", "Friday"],
-            sectionLocation: "PEC 213",
-            sectionSize: 30,
-            sectionStartDate: "08/06/2022",
-            sectionEndDate: "11/18/2022",
-            sectionSemester: "Fall",
-            sectionTerms: ["T1", "T2"],
-          },
-          {
-            sectionId: 1,
-            sectionNumber: "CMSC-2413",
-            sectionInstanceNumber: 1,
-            sectionName: "Assembly Language",
-            sectionStartTime: "11:00am",
-            sectionEndTime: "11:55am",
-            sectionDOW: ["Tuesday", "Thursday"],
-            sectionLocation: "PEC 211",
-            sectionSize: 30,
-            sectionStartDate: "08/06/2022",
-            sectionEndDate: "11/18/2022",
-            sectionSemester: "Fall",
-            sectionTerms: ["T1", "T2"],
-          },
-        ],
-        timeout: 2000,
-        snackbar: false,
-        snackbarText: "",
-        snackbarColor: "darkBlue",
-      };
-    },
-    methods: {
-      openSnackBar(val) {
-        this.snackbar = val[1];
-        this.snackbarText = val[0];
-        this.snackbarColor = val[2];
-      },
-      triggerDownload() {
-        const doc = new jsPDF({
-          orientation: "l",
-          unit: "px",
-          format: "a4",
-          hotfixes: ["px_scaling"],
-        });
-        // Searches for a ref value of 'content' and generates the download from that
-        html2canvas(this.$refs.content, {
-          width: doc.internal.pageSize.getWidth(),
-          height: doc.internal.pageSize.getHeight(),
-        }).then((canvas) => {
-          const img = canvas.toDataURL("image/png");
+    triggerDownload() {
+      const doc = new jsPDF({
+        orientation: "l",
+        unit: "px",
+        format: "a4",
+        hotfixes: ["px_scaling"],
+      });
+      // Searches for a ref value of 'content' and generates the download from that
+      html2canvas(this.$refs.content, {
+        width: doc.internal.pageSize.getWidth(),
+        height: doc.internal.pageSize.getHeight(),
+      }).then((canvas) => {
+        const img = canvas.toDataURL("image/png");
 
-          doc.addImage(
-            img,
-            "PNG",
-            0,
-            0,
-            doc.internal.pageSize.getWidth(),
-            doc.internal.pageSize.getHeight()
-          );
-          doc.save("yourSectionsDownload.pdf");
-        });
-      },
+        doc.addImage(
+          img,
+          "PNG",
+          0,
+          0,
+          doc.internal.pageSize.getWidth(),
+          doc.internal.pageSize.getHeight()
+        );
+        doc.save("yourSectionsDownload.pdf");
+      });
     },
-  };
+  },
+};
 </script>
