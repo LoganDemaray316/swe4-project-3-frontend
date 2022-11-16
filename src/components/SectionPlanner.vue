@@ -7,52 +7,48 @@
                         FILTERS
                     </v-card-title>
                     <v-card-text></v-card-text>
-                    <v-card-text class="font-weight-1 darkBlue--text lightBlue">
-                        Department
-                    </v-card-text>
-                    <v-card-text>
-                        <v-checkbox
-                            v-model="checkbox"
-                            label="CMSC"
+                    <v-select class="font-weight-1 darkBlue--text lightBlue"
+                            ref="dept"
                             color="darkBlue"
-                            value="darkBlue"
-                        ></v-checkbox>
-                    </v-card-text>
-                    <v-card-text class="font-weight-1 darkBlue--text lightBlue">
-                        Faculty
-                    </v-card-text>
-                    <v-card-text>
-                        <v-checkbox
-                            v-model="checkbox"
-                            label="CMSC"
+                            v-model="dept"
+                            :items="departments"
+                            :menu-props="{maxHeight: '400'}"
+                            label="Department"
+                            multiple
+                        ></v-select>
+                    <v-card-text></v-card-text>
+                    <v-select class="font-weight-1 darkBlue--text lightBlue"
+                            ref="faculty"
                             color="darkBlue"
-                            value="darkBlue"
-                        ></v-checkbox>
-                    </v-card-text>
-                    <v-card-text class="font-weight-1 darkBlue--text lightBlue">
-                        Room
-                    </v-card-text>
-                    <v-card-text>
-                        <v-checkbox
-                            v-model="checkbox"
-                            label="CMSC"
+                            v-model="faculty"
+                            :items="facultyMembers"
+                            :menu-props="{maxHeight: '400'}"
+                            label="Faculty"
+                            multiple
+                        ></v-select>
+                    <v-card-text></v-card-text>
+                    <v-select class="font-weight-1 darkBlue--text lightBlue"
+                            ref="room"
                             color="darkBlue"
-                            value="darkBlue"
-                        ></v-checkbox>
-                    </v-card-text>
+                            v-model="room"
+                            :items="rooms"
+                            :menu-props="{maxHeight: '400'}"
+                            label="Room"
+                            multiple
+                        ></v-select>
+                    <v-card-text></v-card-text>
+                    <v-select class="font-weight-1 darkBlue--text lightBlue"
+                            ref="daysOfWeek"
+                            color="darkBlue"
+                            v-model="daysOfWeek"
+                            :items="daysOptions"
+                            :menu-props="{maxHeight: '400'}"
+                            label="Days of Week"
+                            multiple
+                        ></v-select>
+                    <v-card-text></v-card-text>
                 </v-card>
             </v-col>
-                   <!--  <v-row
-                        v-for="filter in filters"
-                        :key="filter.filterId"
-                        no-gutters
-                    >
-                        <v-col cols=“1”>
-                            {{filter.filterTitle}}
-                            
-                        </v-col>
-                    </v-row>
-                </v-col> -->
                 <v-col cols="9">
                     <v-card>
                     <v-calendar
@@ -80,15 +76,32 @@
             'end',
         ],
 
-        filters: [
-            'Department',
-            'Faculty',
-            'Room',
+        departments: [
+            'CMSC',
+            'COMM',
+            'MUSC',
+        ],
+
+        facultyMembers: [
+            'David North',
+            'Brian Simmons',
+            'Kyle Pullen'
+        ],
+
+        rooms: [
+            '233',
+            '231',
+            '228',
+        ],
+
+        daysOptions: [
+            'Monday',
+            'Tuesday',
+            'Wednesday',
+            'Thursday',
+            "Friday",
         ],
 /* 
-        return [
-            checkbox: true,
-        ], */
         
         //today: '2022-11-09',
         //sections: [],
@@ -112,7 +125,7 @@
         //         end: '2022-11-09 11:55',
         //     },
         // ]
-        
+        */
         }),
     };
 </script>
