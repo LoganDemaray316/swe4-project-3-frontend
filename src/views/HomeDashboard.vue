@@ -6,7 +6,9 @@
           <v-card-title class="font-weight-bold white--text darkBlue">
             YOUR SECTIONS
             <v-btn icon @click="triggerDownload()">
-              <font-awesome-icon icon="fa-solid fa-download" />
+              <font-awesome-icon
+                icon="fa-solid fa-download"
+                class="white--text" />
             </v-btn>
           </v-card-title>
           <v-container fluid ref="content">
