@@ -63,6 +63,7 @@
       name: "",
       role: "",
       drawer: false,
+      userName: "",
       menuItems: [
         {
           title: "Dashboard",
@@ -137,6 +138,5 @@
             console.log("error", error);
           });
       },
-    },
   };
 </script>
