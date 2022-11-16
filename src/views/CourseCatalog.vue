@@ -3,7 +3,8 @@
     <v-card-title>
       <v-text-field
         color="darkBlue"
-        v-model="search"
+        v-model="input"
+        type="text"
         append-icon="mdi-magnify"
         label="Search"
         single-line
@@ -74,24 +75,6 @@
         </v-col>
         <v-col :lg="2" :md="3" :sm="6" :xs="12">
           <v-card-title class="font-weight-bold">
-            {{ "DAYS OF CLASS" }}
-          </v-card-title>
-          <v-checkbox label="Sunday" value="sunday" hide-details></v-checkbox>
-          <v-checkbox label="Monday" value="monday" hide-details></v-checkbox>
-          <v-checkbox label="Tuesday" value="tuesday" hide-details></v-checkbox>
-          <v-checkbox
-            label="Wednesday"
-            value="wednesday"
-            hide-details></v-checkbox>
-          <v-checkbox
-            label="Thursday"
-            value="thursday"
-            hide-details></v-checkbox>
-          <v-checkbox label="Friday" value="friday" hide-details></v-checkbox>
-          <v-checkbox label="Saturday" value="saturday"></v-checkbox>
-        </v-col>
-        <v-col :lg="2" :md="3" :sm="6" :xs="12">
-          <v-card-title class="font-weight-bold">
             {{ "LAB" }}
           </v-card-title>
           <v-checkbox
@@ -101,7 +84,7 @@
         </v-col>
       </v-row>
     </v-container>
-    <v-pagination v-model="page" :length="6"></v-pagination>
+    <v-pagination v-model="page" :length="2"></v-pagination>
     <v-row>
       <v-col cols="12">
         <v-card>
@@ -123,7 +106,7 @@
         </v-card>
       </v-col>
     </v-row>
-    <v-pagination v-model="page" :length="6"></v-pagination>
+    <v-pagination v-model="page" :length="2"></v-pagination>
     <v-snackbar
       class="font-weight-bold"
       v-model="snackbar"
@@ -168,28 +151,99 @@
         courses: [
           {
             courseId: 0,
-            courseNumber: "CMSC-2113",
-            courseClass: "Object Oriented Programming",
-            courseSemester: ["Fall"],
-            courseLab: true,
-            coursePrereq: "CMSC-1111",
+            courseNumber: "ACCT-2113",
+            courseClass: "Accounting Principles I",
+            courseSemester: ["Fall, Winter"],
+            courseLab: false,
+            coursePrereq: "",
             courseDescription:
-              "Here is the long description that no student has ever read and then takes the class without looking it over and regrets it because they thought it would be easy.",
+              "Purpose of accounting, recording transactions, preparing financial statements, the use of special journals and general and subsidiary ledgers, introduction of accounting principles, accounting for a merchandising firm, and payroll accounting. This course is normally offered every semester.",
           },
           {
             courseId: 1,
-            courseNumber: "CMSC-2413",
-            courseClass: "Assembly Language",
+            courseNumber: "ACCT-2213",
+            courseClass: "Accounting Principles II",
+            courseSemester: ["Fall", "Spring"],
+            courseLab: false,
+            coursePrereq: "ACCT-2113",
+            courseDescription:
+              "Continuation of Accounting Principles I. Partnership accounting, corporation accounting, additional accounting principles, analyzing and interpreting financial statements, development of management decision-making accounting data, introduction to cost accounting, and cost-volume-profit analysis. This course is normally offered every semester.",
+          },
+          {
+            courseId: 2,
+            courseNumber: "ACCT-3113",
+            courseClass: "Intermediate Accounting I",
+            courseSemester: ["Fall"],
+            courseLab: false,
+            coursePrereq: "ACCT-2213",
+            courseDescription:
+              "Study of accounting theory and assumptions underlying Generally Accepted Accounting Principles related to financial statements, generally, and current assets, specifically. Special consideration is given to pronouncements of the Financial Accounting Standards Board, the American Institute of Certified Public Accountants, the American Accounting Association and the Securities and Exchange Commission. This course is normally offered fall semester.",
+          },
+          {
+            courseId: 3,
+            courseNumber: "ACCT-3213",
+            courseClass: "Intermediate Accounting II",
+            courseSemester: ["Spring"],
+            courseLab: false,
+            coursePrereq: "ACCT-3113",
+            courseDescription:
+              "Continuation of Intermediate Accounting I. Study of Generally Accepted Accounting Principles related to plant assets, liabilities and capital, financial statement analysis, price level accounting, and leasing transactions. This course is normally offered spring semester.",
+          },
+          {
+            courseId: 4,
+            courseNumber: "ACCT-3313",
+            courseClass: "Cost Accounting",
+            courseSemester: ["Fall", "Spring"],
+            courseLab: false,
+            coursePrereq: "ACCT-2213",
+            courseDescription:
+              "The development of cost and accounting data for internal use in planning, control, and decision making by managers. Topics and techniques studied are job-order and process cost accounting; accounting for materials, labor, and factory overhead costs; standard cost accounting; payroll; budgeting; responsibility accounting; cost-volume-profit analysis, and direct costing. This course is offered every semester.",
+          },
+          {
+            courseId: 5,
+            courseNumber: "ACCT-3323",
+            courseClass: "Managerial Accounting",
             courseSemester: ["Fall", "Spring"],
             courseLab: false,
             coursePrereq: "",
             courseDescription:
-              "Here is the long description that no student has ever read and then takes the class without looking it over and regrets it because they thought it would be easy.",
+              "Study of the use of cost accounting data as a tool for planning, control, and decision making by managers. Topics studied include the nature of costs and their behavior; design of job-order and process cost accounting systems; cost-volume-profit relationships and profit planning; segmented reporting; comparison of direct costing with absorption costing; control of operations through standard costs and flexible budgets; pricing of products and services; relevant costs for decision-making and capital budgeting. This course is offered as needed.",
+          },
+          {
+            courseId: 6,
+            courseNumber: "ACCT-3413",
+            courseClass: "Income Taxation",
+            courseSemester: ["Fall"],
+            courseLab: false,
+            coursePrereq: "ACCT-2213",
+            courseDescription:
+              "An introduction to the federal income tax, considering income, deductions, payment of tax, and other matters relating to personal income tax returns. This course is normally offered fall semester.",
+          },
+          {
+            courseId: 7,
+            courseNumber: "ACCT-3513",
+            courseClass: "Advanced Federal Taxation",
+            courseSemester: ["Spring"],
+            courseLab: false,
+            coursePrereq: "ACCT-3413",
+            courseDescription:
+              "A continuation of the study of the federal income tax as it relates to corporations, partnerships and fiduciaries. Also included is the study of more specialized income tax problems and the federal Social Security, estate, and gift taxes. This course is normally offered spring semester.",
+          },
+          {
+            courseId: 8,
+            courseNumber: "ACCT-3713",
+            courseClass: "Accounting Information Systems",
+            courseSemester: ["Spring"],
+            courseLab: false,
+            coursePrereq: "ACCT-3113",
+            courseDescription:
+              "Concepts underlying the analysis, design, use, control and audit of accounting information systems. The flow of accounting information through computerized information systems is emphasized. This course is normally offered in the spring semester.",
           },
         ],
       };
     },
     methods: {
+      search() {},
       closeCreateDialog(val) {
         this.createDialog = val;
       },
