@@ -126,14 +126,6 @@
             console.log("error", error);
           });
       },
-      setRoles() {
-        this.user = Utils.getStore("user");
-        if (this.user != null) {
-          this.name = this.user.fname + " " + this.user.lname;
-          this.role = this.user.role;
-          console.log(this.role);
-        }
-      },
     },
   };
 </script>
