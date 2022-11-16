@@ -53,6 +53,13 @@
       <v-btn
         text
         class="font-weight-bold"
+        color="darkerRed"
+        @click="closeDialog()">
+        Cancel
+      </v-btn>
+      <v-btn
+        text
+        class="font-weight-bold"
         color="darkerGreen"
         @click="saveUser(), closeDialog()">
         Save
