@@ -18,14 +18,19 @@
       <v-spacer></v-spacer>
       <v-toolbar-items class="hidden-sm-and-down">
         <v-btn
+          class="font-weight-bold"
           color="white"
           plain
-          v-for="item in menuItems"
+          v-for="item in menuItemsForRole"
           :key="item.title"
           :to="item.path">
           {{ item.title }}
         </v-btn>
-        <v-btn color="white" plain v-on:click="logout()">
+        <v-btn
+          class="font-weight-bold"
+          color="white"
+          plain
+          v-on:click="logout()">
           {{ "LOGOUT" }}
         </v-btn>
       </v-toolbar-items>
@@ -35,7 +40,7 @@
       <v-list>
         <v-list-item
           exact
-          v-for="item in menuItems"
+          v-for="item in menuItemsForRole"
           :key="item.title"
           :to="item.path">
           <v-list-item-content>{{ item.title }}</v-list-item-content>
@@ -55,14 +60,38 @@
     userFeatures: ["LOGOUT"],
     data: () => ({
       title: "SECTION PLANNER",
+      name: "",
+      role: "",
       drawer: false,
       userName: "",
       menuItems: [
-        { title: "Dashboard", path: "/HomeDashboard" },
-        { title: "Section Planner", path: "/SectionPlanner" },
-        { title: "Course Catalog", path: "/CourseCatalog" },
+        {
+          title: "Dashboard",
+          path: "/HomeDashboard",
+          roles: ["admin", "faculty", "chair"],
+        },
+        {
+          title: "Section Planner",
+          path: "/SectionPlanner",
+          roles: ["admin", "faculty", "chair"],
+        },
+        {
+          title: "Course Catalog",
+          path: "/CourseCatalog",
+          roles: ["admin", "faculty", "chair"],
+        },
       ],
+      menuItemsForRole: [],
     }),
+    async created() {
+      this.user = Utils.getStore("user");
+      if (this.user != null) {
+        this.name = this.user.fname + " " + this.user.lname;
+        this.role = this.user.role;
+      }
+
+      this.setMenu();
+    },
     computed: {
       theme() {
         return this.$vuetify.theme.dark ? "dark" : "light";
@@ -75,14 +104,27 @@
         }
       },
     },
-    async created() {
-      // ensures that their name gets set properly from store
-      this.user = Utils.getStore("user");
-      if (this.user != null) {
-        this.userName = this.user.fName + " " + this.user.lName;
-      }
+    mounted() {
+      this.setMenu();
     },
     methods: {
+      setMenu() {
+        this.menuItemsForRole = [];
+        for (var i = 0; i < this.menuItems.length; i++) {
+          const item = this.menuItems[i];
+          if (item.roles.includes(this.role)) {
+            this.menuItemsForRole.push(item);
+          }
+        }
+      },
+      setRoles() {
+        this.user = Utils.getStore("user");
+        if (this.user != null) {
+          this.name = this.user.fname + " " + this.user.lname;
+          this.role = this.user.role;
+          console.log(this.role);
+        }
+      },
       logout: function () {
         const user = Utils.getStore("user");
         AuthServices.logoutUser(user)
@@ -96,6 +138,5 @@
             console.log("error", error);
           });
       },
-    },
   };
 </script>

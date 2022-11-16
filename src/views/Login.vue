@@ -67,6 +67,7 @@
         };
         AuthServices.loginUser(token)
           .then((response) => {
+            console.log(response.data);
             this.user = response.data;
             Utils.setStore("user", this.user);
             this.fName = this.user.fName;

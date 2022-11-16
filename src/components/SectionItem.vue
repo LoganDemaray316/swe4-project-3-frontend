@@ -78,7 +78,8 @@
       </v-list-item-group>
       <v-divider class="lightGray"></v-divider>
     </v-list>
-    <v-card-actions class="white">
+
+    <v-card-actions class="white" v-if="role === 'admin' || role === 'chair'">
       <v-dialog v-model="editDialog" persistent max-width="600px">
         <template v-slot:activator="{ on, attrs }">
           <v-btn
@@ -117,11 +118,14 @@
 <script>
   import SectionItemEdit from "./SectionItemEdit.vue";
   import SectionItemDelete from "./SectionItemDelete.vue";
+  import Utils from "../config/utils.js";
 
   export default {
     name: "SectionItem",
     data() {
       return {
+        name: "",
+        role: "",
         editDialog: false,
         deleteDialog: false,
       };
@@ -132,6 +136,13 @@
     },
     props: {
       section: Object,
+    },
+    async created() {
+      this.user = Utils.getStore("user");
+      if (this.user != null) {
+        this.name = this.user.fname + " " + this.user.lname;
+        this.role = this.user.role;
+      }
     },
     methods: {
       closeEditDialog(val) {
