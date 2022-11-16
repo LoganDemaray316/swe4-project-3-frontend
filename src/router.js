@@ -9,6 +9,7 @@ const routerOptions = [
   {
     path: "/HomeDashboard",
     component: "HomeDashboard",
+    name: "homeDashboard",
   },
   {
     path: "/SectionPlanner",
