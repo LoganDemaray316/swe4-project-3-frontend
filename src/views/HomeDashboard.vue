@@ -45,7 +45,7 @@
           <v-card-title class="font-weight-bold white--text darkBlue">
             ABOUT
           </v-card-title>
-          <v-card-text> </v-card-text>
+          <v-card-text class="px-0 pb-0"><UserAbout></UserAbout></v-card-text>
         </v-card>
       </v-col>
     </v-row>
@@ -74,15 +74,15 @@
 
 <script>
 import SectionItem from "../components/SectionItem.vue";
+import UserAbout from "../components/UserAbout.vue";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
-import SimpleUpload from "@/components/SimpleUpload.vue";
 
 export default {
   name: "HomeDashboard",
   components: {
     SectionItem,
-    SimpleUpload,
+    UserAbout,
   },
   data() {
     return {

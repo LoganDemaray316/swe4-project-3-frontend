@@ -21,6 +21,9 @@ import { faCircleExclamation } from "@fortawesome/free-solid-svg-icons";
 import { faFilter } from "@fortawesome/free-solid-svg-icons";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { faDownload } from "@fortawesome/free-solid-svg-icons";
+import { faLock } from "@fortawesome/free-solid-svg-icons";
+import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
+import { faUser } from "@fortawesome/free-solid-svg-icons";
 
 library.add(faLocationDot);
 library.add(faUserGroup);
@@ -35,6 +38,9 @@ library.add(faCircleExclamation);
 library.add(faFilter);
 library.add(faPlus);
 library.add(faDownload);
+library.add(faLock);
+library.add(faEnvelope);
+library.add(faUser);
 
 Vue.component("font-awesome-icon", FontAwesomeIcon);
 
